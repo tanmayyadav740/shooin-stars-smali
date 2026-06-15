@@ -472,10 +472,12 @@
 
     iput-object p1, p0, Lcom/vaidilya/collegeconnect/activities/Subscription;->uid:Ljava/lang/String;
 
-    .line Always show premium state regardless of login
+    .line 75
+    # Always show premium state regardless of login
     invoke-direct {p0}, Lcom/vaidilya/collegeconnect/activities/Subscription;->setupTermsClickable()V
 
-    .line Also always load active state
+    .line 76
+    # Also always load active state
     invoke-direct {p0}, Lcom/vaidilya/collegeconnect/activities/Subscription;->loadSubscriptionStatus()V
 
     return-void
@@ -487,7 +489,8 @@
     .line 209
     invoke-super {p0}, Landroidx/appcompat/app/AppCompatActivity;->onDestroy()V
 
-    .line Subscription logic removed - no cleanup needed
+    .line 210
+    # Subscription logic removed - no cleanup needed
     return-void
 .end method
 
@@ -497,7 +500,8 @@
     .line 264
     invoke-super {p0}, Landroidx/appcompat/app/AppCompatActivity;->onResume()V
 
-    .line Always show active state
+    .line 265
+    # Always show active state
     invoke-direct {p0}, Lcom/vaidilya/collegeconnect/activities/Subscription;->loadSubscriptionStatus()V
 
     return-void
