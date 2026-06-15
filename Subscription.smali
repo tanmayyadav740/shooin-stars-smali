@@ -228,45 +228,11 @@
 .end method
 
 .method private loadSubscriptionStatus()V
-    .locals 2
+    .locals 0
 
     .line 139
-    invoke-static {}, Lcom/google/firebase/database/FirebaseDatabase;->getInstance()Lcom/google/firebase/database/FirebaseDatabase;
-
-    move-result-object v0
-
-    const-string v1, "users"
-
-    .line 140
-    invoke-virtual {v0, v1}, Lcom/google/firebase/database/FirebaseDatabase;->getReference(Ljava/lang/String;)Lcom/google/firebase/database/DatabaseReference;
-
-    move-result-object v0
-
-    iget-object v1, p0, Lcom/vaidilya/collegeconnect/activities/Subscription;->uid:Ljava/lang/String;
-
-    .line 141
-    invoke-virtual {v0, v1}, Lcom/google/firebase/database/DatabaseReference;->child(Ljava/lang/String;)Lcom/google/firebase/database/DatabaseReference;
-
-    move-result-object v0
-
-    .line 144
-    iget-object v1, p0, Lcom/vaidilya/collegeconnect/activities/Subscription;->subscriptionListener:Lcom/google/firebase/database/ValueEventListener;
-
-    if-eqz v1, :cond_0
-
-    .line 145
-    invoke-virtual {v0, v1}, Lcom/google/firebase/database/DatabaseReference;->removeEventListener(Lcom/google/firebase/database/ValueEventListener;)V
-
-    .line 148
-    :cond_0
-    new-instance v1, Lcom/vaidilya/collegeconnect/activities/Subscription$2;
-
-    invoke-direct {v1, p0}, Lcom/vaidilya/collegeconnect/activities/Subscription$2;-><init>(Lcom/vaidilya/collegeconnect/activities/Subscription;)V
-
-    iput-object v1, p0, Lcom/vaidilya/collegeconnect/activities/Subscription;->subscriptionListener:Lcom/google/firebase/database/ValueEventListener;
-
-    .line 202
-    invoke-virtual {v0, v1}, Lcom/google/firebase/database/DatabaseReference;->addValueEventListener(Lcom/google/firebase/database/ValueEventListener;)Lcom/google/firebase/database/ValueEventListener;
+    # Always show premium/active state - subscription logic removed
+    invoke-direct {p0}, Lcom/vaidilya/collegeconnect/activities/Subscription;->showActiveState()V
 
     return-void
 .end method
@@ -275,7 +241,7 @@
     .locals 3
 
     .line 244
-    const-string v0, "Redirecting to Shooin Stars secure portal..."
+    const-string v0, "Premium access is already active!"
 
     const/4 v1, 0x0
 
@@ -285,66 +251,6 @@
 
     .line 248
     invoke-virtual {v0}, Landroid/widget/Toast;->show()V
-
-    .line 250
-    new-instance v0, Ljava/lang/StringBuilder;
-
-    const-string v1, "https://api.shooinstars.in/subscribe?uid="
-
-    invoke-direct {v0, v1}, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
-
-    iget-object v1, p0, Lcom/vaidilya/collegeconnect/activities/Subscription;->uid:Ljava/lang/String;
-
-    .line 251
-    invoke-static {v1}, Landroid/net/Uri;->encode(Ljava/lang/String;)Ljava/lang/String;
-
-    move-result-object v1
-
-    invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v0
-
-    const-string v1, "&amount="
-
-    invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v0
-
-    invoke-virtual {v0, p1}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
-
-    move-result-object p1
-
-    const-string v0, "&module="
-
-    invoke-virtual {p1, v0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object p1
-
-    .line 253
-    invoke-static {p2}, Landroid/net/Uri;->encode(Ljava/lang/String;)Ljava/lang/String;
-
-    move-result-object p2
-
-    invoke-virtual {p1, p2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object p1
-
-    invoke-virtual {p1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
-
-    move-result-object p1
-
-    .line 256
-    new-instance p2, Landroid/os/Handler;
-
-    invoke-direct {p2}, Landroid/os/Handler;-><init>()V
-
-    new-instance v0, Lcom/vaidilya/collegeconnect/activities/Subscription$$ExternalSyntheticLambda0;
-
-    invoke-direct {v0, p0, p1}, Lcom/vaidilya/collegeconnect/activities/Subscription$$ExternalSyntheticLambda0;-><init>(Lcom/vaidilya/collegeconnect/activities/Subscription;Ljava/lang/String;)V
-
-    const-wide/16 v1, 0x320
-
-    invoke-virtual {p2, v0, v1, v2}, Landroid/os/Handler;->postDelayed(Ljava/lang/Runnable;J)Z
 
     return-void
 .end method
@@ -448,35 +354,7 @@
     .locals 2
 
     .line 219
-    iget-object v0, p0, Lcom/vaidilya/collegeconnect/activities/Subscription;->statusText:Landroid/widget/TextView;
-
-    const/16 v1, 0x8
-
-    invoke-virtual {v0, v1}, Landroid/widget/TextView;->setVisibility(I)V
-
-    .line 221
-    iget-object v0, p0, Lcom/vaidilya/collegeconnect/activities/Subscription;->buyBtn:Landroid/widget/Button;
-
-    const/4 v1, 0x1
-
-    invoke-virtual {v0, v1}, Landroid/widget/Button;->setEnabled(Z)V
-
-    .line 222
-    iget-object v0, p0, Lcom/vaidilya/collegeconnect/activities/Subscription;->buyBtn:Landroid/widget/Button;
-
-    const-string v1, "ENROLL FOR COUNSELING PROGRAM"
-
-    invoke-virtual {v0, v1}, Landroid/widget/Button;->setText(Ljava/lang/CharSequence;)V
-
-    .line 223
-    iget-object v0, p0, Lcom/vaidilya/collegeconnect/activities/Subscription;->buyBtn:Landroid/widget/Button;
-
-    new-instance v1, Lcom/vaidilya/collegeconnect/activities/Subscription$$ExternalSyntheticLambda4;
-
-    invoke-direct {v1, p0}, Lcom/vaidilya/collegeconnect/activities/Subscription$$ExternalSyntheticLambda4;-><init>(Lcom/vaidilya/collegeconnect/activities/Subscription;)V
-
-    invoke-virtual {v0, v1}, Landroid/widget/Button;->setOnClickListener(Landroid/view/View$OnClickListener;)V
-
+    # This method is never called now - subscription logic removed
     return-void
 .end method
 
@@ -594,39 +472,11 @@
 
     iput-object p1, p0, Lcom/vaidilya/collegeconnect/activities/Subscription;->uid:Ljava/lang/String;
 
-    if-eqz p1, :cond_1
-
-    .line 76
-    invoke-virtual {p1}, Ljava/lang/String;->isEmpty()Z
-
-    move-result p1
-
-    if-eqz p1, :cond_0
-
-    goto :goto_0
-
-    .line 82
-    :cond_0
+    .line Always show premium state regardless of login
     invoke-direct {p0}, Lcom/vaidilya/collegeconnect/activities/Subscription;->setupTermsClickable()V
 
-    .line 83
+    .line Also always load active state
     invoke-direct {p0}, Lcom/vaidilya/collegeconnect/activities/Subscription;->loadSubscriptionStatus()V
-
-    return-void
-
-    .line 77
-    :cond_1
-    :goto_0
-    const-string p1, "User not logged in"
-
-    invoke-static {p0, p1, v0}, Landroid/widget/Toast;->makeText(Landroid/content/Context;Ljava/lang/CharSequence;I)Landroid/widget/Toast;
-
-    move-result-object p1
-
-    invoke-virtual {p1}, Landroid/widget/Toast;->show()V
-
-    .line 78
-    invoke-virtual {p0}, Lcom/vaidilya/collegeconnect/activities/Subscription;->finish()V
 
     return-void
 .end method
@@ -637,40 +487,7 @@
     .line 209
     invoke-super {p0}, Landroidx/appcompat/app/AppCompatActivity;->onDestroy()V
 
-    .line 211
-    iget-object v0, p0, Lcom/vaidilya/collegeconnect/activities/Subscription;->uid:Ljava/lang/String;
-
-    if-eqz v0, :cond_0
-
-    iget-object v0, p0, Lcom/vaidilya/collegeconnect/activities/Subscription;->subscriptionListener:Lcom/google/firebase/database/ValueEventListener;
-
-    if-eqz v0, :cond_0
-
-    .line 212
-    invoke-static {}, Lcom/google/firebase/database/FirebaseDatabase;->getInstance()Lcom/google/firebase/database/FirebaseDatabase;
-
-    move-result-object v0
-
-    const-string v1, "users"
-
-    .line 213
-    invoke-virtual {v0, v1}, Lcom/google/firebase/database/FirebaseDatabase;->getReference(Ljava/lang/String;)Lcom/google/firebase/database/DatabaseReference;
-
-    move-result-object v0
-
-    iget-object v1, p0, Lcom/vaidilya/collegeconnect/activities/Subscription;->uid:Ljava/lang/String;
-
-    .line 214
-    invoke-virtual {v0, v1}, Lcom/google/firebase/database/DatabaseReference;->child(Ljava/lang/String;)Lcom/google/firebase/database/DatabaseReference;
-
-    move-result-object v0
-
-    iget-object v1, p0, Lcom/vaidilya/collegeconnect/activities/Subscription;->subscriptionListener:Lcom/google/firebase/database/ValueEventListener;
-
-    .line 215
-    invoke-virtual {v0, v1}, Lcom/google/firebase/database/DatabaseReference;->removeEventListener(Lcom/google/firebase/database/ValueEventListener;)V
-
-    :cond_0
+    .line Subscription logic removed - no cleanup needed
     return-void
 .end method
 
@@ -680,7 +497,7 @@
     .line 264
     invoke-super {p0}, Landroidx/appcompat/app/AppCompatActivity;->onResume()V
 
-    .line 265
+    .line Always show active state
     invoke-direct {p0}, Lcom/vaidilya/collegeconnect/activities/Subscription;->loadSubscriptionStatus()V
 
     return-void
