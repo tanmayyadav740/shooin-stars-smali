@@ -46,7 +46,8 @@
 .method public onCancelled(Lcom/google/firebase/database/DatabaseError;)V
     .locals 0
 
-    .line Subscription logic removed - no error handling needed
+    .line 149
+    # Subscription logic removed - no error handling needed
     return-void
 .end method
 
